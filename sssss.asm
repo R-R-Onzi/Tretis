@@ -38,7 +38,7 @@
                  db 000,000,000,000,000,000,000,000,000,000,000,186,000,000,000,000,000,000,000,000,000,000,186,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000
                  db 000,000,000,000,000,000,000,000,000,000,000,186,000,000,000,000,000,000,000,000,000,000,186,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000
                  db 000,000,000,000,000,000,000,000,000,000,000,200,205,205,205,205,205,205,205,205,205,205,188,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000
-                 fim_jogo DB 'GAME OVER'
+                 fim_jogo DB 'G A M E O V E R'
                  
                  
                  teladrei db 000,'S','C','O','R','E',000
@@ -51,6 +51,7 @@
                           db 000,'para',0,0
                           db 0,'seguir'
 
+linha_zero_nulo db 0,0,0,0,0,0,0,0,0,0,0 
     
  peca_T_grande db   0,0,0,0,0,0 
      db    0,0,219,219,0,0     
@@ -1805,7 +1806,7 @@ screen_final proc
     
     mov bp,0b800h
     mov es,bp
-   MOV BP,1FEH
+    MOV BP,1F8H
    XOR CL,CL
    MOV SI,OFFSET FIM_JOGO
     
@@ -1817,7 +1818,7 @@ screen_final proc
     ADD BP, 2
     INC SI
     INC CL
-    CMP CL,9
+    CMP CL,0fh
     JNE ALFAFA
    
     
@@ -1825,7 +1826,7 @@ screen_final proc
   mov si,offset teladrei
     xor bx,bx
     xor cx,cx
-   mov bp,2a0h
+    mov bp,29eh
     mov ax,bp
     
     retete:
@@ -1905,7 +1906,7 @@ endp
     call printa_screendos 
    call zera_tudo
 
-   voltaini: call el_sensor    
+voltaini: call el_sensor    
 
   call zera_posicao
   call faz_grande_print_e_atribui
